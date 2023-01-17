@@ -142,5 +142,36 @@ task idle_task;
     end
 endtask
 
+task lcd_rst_task;
+    begin
+        state_done <= 1'b0;
+        case (flow_ctrl)
+            4'd0:
+            begin
+                en_o[0] <= 1'b1;
+                flow_ctrl <= 4'd1;
+            end
+
+            4'd1:
+                begin
+                    en_o[0] <= 1'b0;
+                    if (done_i[0])
+                        flow_ctrl < 4'd2
+                end
+            
+            4'd2:
+                begin
+                    state_done < = 1'b1;
+                    flow_ctrl <= 4'd0;
+                end
+
+            default:
+                flow_ctrl <= 4'd0;
+        endcase
+    end
+endtask
+
+
+
 
 endmodule
