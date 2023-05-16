@@ -156,7 +156,7 @@ task lcd_rst_task;
                 begin
                     en_o[0] <= 1'b0;
                     if (done_i[0])
-                        flow_ctrl < 4'd2
+                        flow_ctrl <= 4'd2
                 end
             
             4'd2:
